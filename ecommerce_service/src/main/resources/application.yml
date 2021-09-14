@@ -1,0 +1,14 @@
+server:
+  port: 8083
+  http2:
+    enabled: true
+
+spring:
+  application:
+    name: eCommerceService
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+  resources:
+    add-mappings: true

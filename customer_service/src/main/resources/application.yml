@@ -1,0 +1,14 @@
+server:
+  port: 8082
+  http2:
+    enabled: true
+
+spring:
+  application:
+    name: CustomerService
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+  resources:
+    add-mappings: true
