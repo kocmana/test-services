@@ -8,8 +8,6 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
-    data: classpath*:sql/testdata-*.sql
-    schema: classpath*:sql/schema.sql
   h2:
     console:
       enabled: true
@@ -17,6 +15,10 @@ spring:
   web:
     resources:
       add-mappings: true
+  sql:
+    init:
+      data-locations: classpath*:sql/testdata-*.sql
+      schema-locations: classpath*:sql/schema.sql
 
 logging:
   level:

@@ -10,5 +10,3 @@ spring:
     open-in-view: true
     hibernate:
       ddl-auto: none
-  resources:
-    add-mappings: true
