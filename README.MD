@@ -10,7 +10,6 @@ The services have originally been devised during a [master thesis on GraphQL](ht
 
 ### Additional Technologies/Frameworks/Libraries
 * [Lombok](https://projectlombok.org/) to reduce boilerplate code
-* [Springfox](https://springfox.github.io/springfox/) for endpoint documentation
 * [Mapstruct](https://mapstruct.org/) for DTO mappings
 
 ## Test Service Overview
@@ -82,7 +81,6 @@ When using the `local` profile services will expose their APIs as follows:
 
 ### API Reference
 * A complete postman collection as well as a postman environment for the local setup is available as part of this repository.
-* Additionally, a Springfox generated Swagger documentation is available for each service
 
 ### Additional Support for Tinkering
 * **H2 Consoles** are exposed for `local` profile under `/h2-console` for all services except the Integration Service
