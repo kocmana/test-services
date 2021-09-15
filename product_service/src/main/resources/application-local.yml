@@ -21,18 +21,13 @@ spring:
 
 logging:
   level:
-    org.hibernate.SQL: warn
-
-springfox:
-  documentation:
-    swagger:
-      v2:
-        path: swagger
+    root: INFO
+    at.kocmana.testservice: INFO
+    org.hibernate.SQL: WARN
 
 security:
   whitelist:
     - /h2-console/**
-    - /swagger
 
 service:
   delay:

@@ -2,8 +2,6 @@
 <configuration>
   <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
   <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
-  <springProperty scope="context" name="rootLogLevel" source="logging.level.root"
-    defaultValue="warn"/>
 
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -12,7 +10,7 @@
     </encoder>
   </appender>
 
-  <springProfile name="local, test">
+  <springProfile name="local, test, docker">
     <logger name="at.kocmana.testservices" level="info" additivity="false">
       <appender-ref ref="CONSOLE"/>
     </logger>

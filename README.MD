@@ -7,6 +7,7 @@ The services have originally been devised during a [master thesis on GraphQL](ht
 * Java 11 as latest LTS Version
 * Spring Boot 2.5
 * Maven 
+* Docker via JIB
 
 ### Additional Technologies/Frameworks/Libraries
 * [Lombok](https://projectlombok.org/) to reduce boilerplate code
