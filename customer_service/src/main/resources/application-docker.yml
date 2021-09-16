@@ -20,7 +20,7 @@ spring:
       add-mappings: true
   sql:
     init:
-      data-locations: classpath*:sql/testdata-*.sql
+      data-locations: classpath*:sql/testdata.sql
       schema-locations: classpath*:sql/schema.sql
 
 logging:
@@ -40,3 +40,11 @@ service:
     service-delay-mean: 500
     service-delay-standard-deviation: 500
     log-delays: true
+
+customerservice:
+  api-key:
+    header: x-api-key
+    values:
+      - supersecret
+      - megasecret
+      - toptoptopsecret

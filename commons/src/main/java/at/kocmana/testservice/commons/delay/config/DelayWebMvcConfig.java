@@ -22,7 +22,7 @@ public class DelayWebMvcConfig implements WebMvcConfigurer {
   public DelayWebMvcConfig(
       NormallyDistributedServiceDelayInterceptor normallyDistributedServiceDelayInterceptor) {
     this.normallyDistributedServiceDelayInterceptor = normallyDistributedServiceDelayInterceptor;
-    log.info("Service delays active.");
+    log.warn("Service delays active.");
   }
 
   @Override

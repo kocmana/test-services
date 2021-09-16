@@ -41,7 +41,7 @@
         <docker.image>registry://gcr.io/distroless/java-debian10</docker.image>
         <docker.image.checksum>sha256:5b4bb0f378489f8b15547d79844a9e7b5343539051d99942f414872e380124a2
         </docker.image.checksum>
-        <docker.container.port>8081</docker.container.port>
+        <docker.container.port>8080</docker.container.port>
     </properties>
 
     <dependencies>
