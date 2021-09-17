@@ -2,16 +2,11 @@
 This project contains three microservices to facilitate creaton of PoCs for API gateway technologies and frameworks.
 The services have originally been devised during a [master thesis on GraphQL](https://github.com/kocmana/tw_master).
 
-## Stack
-### Main Technologies Used
+Services are based on the following Stack
 * Java 11 as latest LTS Version
 * Spring Boot 2.5
 * Maven 
 * Docker via JIB
-
-### Additional Technologies/Frameworks/Libraries
-* [Lombok](https://projectlombok.org/) to reduce boilerplate code
-* [Mapstruct](https://mapstruct.org/) for DTO mappings
 
 ## Test Service Overview
 | Service | Domain Objects |Interface | Authentication | Request ID for Logging | Latency | Other Challenges |
@@ -20,31 +15,25 @@ The services have originally been devised during a [master thesis on GraphQL](ht
 | **Product Service** | Product Information, Product Reviews | REST | Basic Auth | UUID | normally distributed, medium to high, dependent on endpoint | Pagination in API response |
 | **ECommerce Service** | Purchases, Price Information | REST | Basic Auth | UID | Spikes of unpredictable high latency (i.e. service warm up behavior) | N+1 issue inducing API design (data only represented by IDs)  |
 
-### Service Description
-
-#### Customer Service
+### Customer Service
 Provides two distinct services:
 * **Customer Information:** Allowing CRUD operations focussed on personal data of customers
 * **Customer Network:** Storing and querying of relationships between customers
 
-#### Product Service
+### Product Service
 Product Service also provides services on two distinct domains:
 * **Product Information:** Provides REST APIs for retrieval, editing and creation of product information.
 * **Product Reviews:** Exposes endpoints for basic functionality to review products.
 
-#### eCommerce Service
+### eCommerce Service
 Again, eCommerce Service provides services for two interacting domains:
 * **Price Information:** Information on current and historic pricing can be managed.
 * **Purchase Information:** Past purchases can be retrieved and new purchases can be made.
 
-#### Monolithic Service
-In addition to the three microservices discussed above, the Monolithic Service provides all functionality in a regular monolithic architecture: All services are provided by one application accessing the same database.
-Its purpose is to contrast findings from the heterogeneous architecture.
+## Simulation Support
+In order to support simulation of specific integration challenges such as unstable services or services with high latencies, two additional functionalities are provided:
 
-### Simulation Support
-In order to support simulation of remote services, two additional functionalities are provided:
-
-#### Overall Service Delay and API Specific Delay
+### Overall Service Delay and API Specific Delay
 Services can be configured in the respective application properties to incorporate "lag" based on three distinct approaches:
 These lag simulations can be activated by adding `@EnableDelaySimulation` on a class in the spring context. 
 * **Fixed Delay:** Calls to all endpoints exposed by this service exhibit a fixed delay.
@@ -58,13 +47,14 @@ Similar to the overall delay approaches, all endpoints can be used to simulate s
 
 These endpoint-specific delays can be used to simulate different service response times with respect to server loads and average query response times.
 
-#### Probabilistic Failure
+### Probabilistic Failure
 Based on controller or rest endpoint level, probabilities for failures (as represented by 4** and 5** status code responses) can be set.
 This simulated error behaviour can be enabled by adding `@EnableFailureSimulation` on a class in the spring context.
 
 Adding the `@ProbabilisticFailureSimulation` (providing both `probability` and `errorCode`) on class or method level enables failure simulation.
 
 ## Installation/How To Use
+### Local Execution
 All services can be run using the `local` profile without any additional required setup.
 This will use a H2 in memory database as persistence layer for each simulated service.
 
@@ -76,12 +66,19 @@ When using the `local` profile services will expose their APIs as follows:
 
 | Service | URI | Port | Username | Password | API Key |
 |---------|-----|------|----------|----------|---------|
-| Customer Service | http://localhost | 8082 | - | - | - |
+| Customer Service | http://localhost | 8082 | - | - | `supersecret` |
 | eCommerce Service | http://localhost | 8083 |  `ecommerceservice_$role` | `ecommerceservice_$role_password` | - |
 | Product Service | http://localhost | 8081 | `productservice_$role` | `productservice_$role_password` | - |
 
+### Execution within a Docker Container
+Additionally, the [JIB](https://github.com/GoogleContainerTools/jib) Maven plugin has been preconfigured to allow easy dockerization of the services.
+
+Images can be created by running `mvn clean package jib:dockerBuild` for a local Docker Daemon. To push to a remote docker registry, a `<to>` tag must be added to the configuration as described [here](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#configuration).
+
+Dockerized services will be using the `docker` profile by default. This profile causes the same application behavior as the `local` profile described above. 
+
 ### API Reference
-* A complete postman collection as well as a postman environment for the local setup is available as part of this repository.
+A complete postman collection as well as a postman environment for the local setup is available as part of this repository.
 
 ### Additional Support for Tinkering
-* **H2 Consoles** are exposed for `local` profile under `/h2-console` for all services except the Integration Service
+* **H2 Consoles** are exposed for `local` and `docker` profile under `/h2-console` for all services except the Integration Service
