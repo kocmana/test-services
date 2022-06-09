@@ -21,9 +21,9 @@
 
     <modules>
         <module>commons</module>
-        <module>customer_service</module>
-        <module>ecommerce_service</module>
-        <module>product_service</module>
+        <module>customer-service</module>
+        <module>ecommerce-service</module>
+        <module>product-service</module>
     </modules>
 
     <properties>
