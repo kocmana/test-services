@@ -15,8 +15,8 @@ public class AnnotationUtils {
 
   public static <T extends Annotation> T extractAnnotation(ProceedingJoinPoint joinPoint,
       Class<T> annotationType) {
-    MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-    Method method = methodSignature.getMethod();
+    var methodSignature = (MethodSignature) joinPoint.getSignature();
+    var method = methodSignature.getMethod();
 
     return findAnnotation(method, annotationType);
   }

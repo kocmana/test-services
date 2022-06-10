@@ -33,8 +33,8 @@ public class DelayAspect {
 
   @Around("@annotation(at.kocmana.testservice.commons.delay.annotation.FixedEndpointDelaySimulation)")
   public Object delayExecutionWithFixedDuration(ProceedingJoinPoint joinPoint) throws Throwable {
-    FixedEndpointDelaySimulation annotation = extractAnnotation(joinPoint, FixedEndpointDelaySimulation.class);
-    Delay delay = createDelayFromAnnotation(annotation);
+    var annotation = extractAnnotation(joinPoint, FixedEndpointDelaySimulation.class);
+    var delay = createDelayFromAnnotation(annotation);
 
     delayResponse(delay);
 
@@ -46,8 +46,7 @@ public class DelayAspect {
       throws Throwable {
     NormallyDistributedEndpointDelaySimulation annotation = extractAnnotation(joinPoint,
         NormallyDistributedEndpointDelaySimulation.class);
-    Delay delay = createDelayFromAnnotation(annotation);
-
+    var delay = createDelayFromAnnotation(annotation);
     delayResponse(delay);
 
     return joinPoint.proceed();
@@ -57,8 +56,7 @@ public class DelayAspect {
   public Object delayExecutionWithProbability(ProceedingJoinPoint joinPoint) throws Throwable {
     ProbabilisticEndpointDelaySimulation annotation = extractAnnotation(joinPoint,
         ProbabilisticEndpointDelaySimulation.class);
-    Delay delay = createDelayFromAnnotation(annotation);
-
+    var delay = createDelayFromAnnotation(annotation);
     delayResponse(delay);
 
     return joinPoint.proceed();

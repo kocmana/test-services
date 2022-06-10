@@ -18,9 +18,9 @@ public class FailureAspect {
 
   @Around("@annotation(at.kocmana.testservice.commons.failure.annotation.ProbabilisticFailureSimulation)")
   public Object failWithProbability(ProceedingJoinPoint joinPoint) throws Throwable {
-    ProbabilisticFailureSimulation annotation = extractAnnotation(joinPoint,
+    var annotation = extractAnnotation(joinPoint,
         ProbabilisticFailureSimulation.class);
-    ProbabilisticFailure probabilisticFailure = new ProbabilisticFailure(annotation.probability(),
+    var probabilisticFailure = new ProbabilisticFailure(annotation.probability(),
         annotation.errorCode());
 
     if (probabilisticFailure.shouldCallFail()) {

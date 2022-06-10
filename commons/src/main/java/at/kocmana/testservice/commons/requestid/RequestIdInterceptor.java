@@ -28,20 +28,20 @@ public class RequestIdInterceptor<T> implements HandlerInterceptor {
   @Override
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
       Object handler, Exception ex) {
-    request.removeAttribute(RequestId.REQUEST_ID_KEY);
-    MDC.remove(RequestId.REQUEST_ID_HEADER_NAME);
+    request.removeAttribute(RequestIdConstants.REQUEST_ID_KEY);
+    MDC.remove(RequestIdConstants.REQUEST_ID_HEADER_NAME);
   }
 
   private void setIdInMdcContext(T requestId) {
-    MDC.put(RequestId.REQUEST_ID_KEY, requestId.toString());
+    MDC.put(RequestIdConstants.REQUEST_ID_KEY, requestId.toString());
   }
 
   private void setIdAsRequestAttribute(HttpServletRequest request, T requestId) {
-    request.setAttribute(RequestId.REQUEST_ID_KEY, requestId.toString());
+    request.setAttribute(RequestIdConstants.REQUEST_ID_KEY, requestId.toString());
   }
 
   private void setIdAsResponseHeader(HttpServletResponse response, T requestId) {
-    response.addHeader(RequestId.REQUEST_ID_HEADER_NAME, requestId.toString());
+    response.addHeader(RequestIdConstants.REQUEST_ID_HEADER_NAME, requestId.toString());
   }
 
 }

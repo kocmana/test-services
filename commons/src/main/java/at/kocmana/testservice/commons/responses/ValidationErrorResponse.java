@@ -1,13 +1,10 @@
 package at.kocmana.testservice.commons.responses;
 
+import java.util.List;
 import lombok.Getter;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.toUnmodifiableList;
 
 @Getter
 public class ValidationErrorResponse extends ErrorResponse {
@@ -30,7 +27,7 @@ public class ValidationErrorResponse extends ErrorResponse {
         .filter(FieldError.class::isInstance)
         .map(FieldError.class::cast)
         .map(this::extractFieldError)
-        .collect(toUnmodifiableList());
+        .toList();
   }
 
   private String extractFieldError(FieldError fieldError) {

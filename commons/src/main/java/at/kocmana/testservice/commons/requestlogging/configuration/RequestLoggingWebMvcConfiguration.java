@@ -1,4 +1,4 @@
-package at.kocmana.testservice.commons.requestlogging.config;
+package at.kocmana.testservice.commons.requestlogging.configuration;
 
 import at.kocmana.testservice.commons.requestlogging.interceptor.RequestLoggingInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,12 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @Aspect
 @Slf4j
-public class RequestLoggingWebMvcConfig implements WebMvcConfigurer {
+public class RequestLoggingWebMvcConfiguration implements WebMvcConfigurer {
 
   private final RequestLoggingInterceptor requestLoggingInterceptor;
 
   @Autowired
-  public RequestLoggingWebMvcConfig(RequestLoggingInterceptor requestLoggingInterceptor) {
+  public RequestLoggingWebMvcConfiguration(RequestLoggingInterceptor requestLoggingInterceptor) {
     this.requestLoggingInterceptor = requestLoggingInterceptor;
   }
 
