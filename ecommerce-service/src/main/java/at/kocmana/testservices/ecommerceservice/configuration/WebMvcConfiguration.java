@@ -1,4 +1,4 @@
-package at.kocmana.testservices.ecommerceservice.config;
+package at.kocmana.testservices.ecommerceservice.configuration;
 
 import at.kocmana.testservice.commons.requestid.RequestIdInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

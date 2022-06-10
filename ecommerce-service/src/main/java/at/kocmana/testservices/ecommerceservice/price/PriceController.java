@@ -4,16 +4,19 @@ import at.kocmana.testservice.commons.delay.annotation.NormallyDistributedEndpoi
 import at.kocmana.testservices.ecommerceservice.price.model.domain.Price;
 import at.kocmana.testservices.ecommerceservice.price.model.dto.PriceDto;
 import at.kocmana.testservices.ecommerceservice.price.model.mapper.PriceMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static java.util.stream.Collectors.toUnmodifiableList;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/price")
@@ -32,8 +35,8 @@ public class PriceController {
   @NormallyDistributedEndpointDelaySimulation(mean = 30, standardDeviation = 10)
   public ResponseEntity<PriceDto> getCurrentPriceForProduct(
       @PathVariable @Valid @NotNull Integer productId) {
-    Price price = priceService.getCurrentPriceForProduct(productId);
-    PriceDto priceDto = priceMapper.priceToPriceDto(price);
+    var price = priceService.getCurrentPriceForProduct(productId);
+    var priceDto = priceMapper.priceToPriceDto(price);
     return ResponseEntity.ok(priceDto);
   }
 
@@ -41,7 +44,7 @@ public class PriceController {
   @NormallyDistributedEndpointDelaySimulation(mean = 60, standardDeviation = 30)
   public ResponseEntity<List<PriceDto>> getAllPricesForProduct(
       @PathVariable @Valid @NotNull Integer productId) {
-    List<Price> prices = priceService.getAllPricesForProduct(productId);
+    var prices = priceService.getAllPricesForProduct(productId);
     return ResponseEntity.ok(toDtos(prices));
   }
 
@@ -51,7 +54,7 @@ public class PriceController {
       @PathVariable @Valid @NotNull Integer productId,
       @RequestParam @Valid @NotNull LocalDateTime from,
       @RequestParam @Valid @NotNull LocalDateTime to) {
-    List<Price> prices = priceService.getPricesForProductAndTimeframe(productId, from, to);
+    var prices = priceService.getPricesForProductAndTimeframe(productId, from, to);
 
     return ResponseEntity.ok(toDtos(prices));
   }
@@ -59,16 +62,16 @@ public class PriceController {
   @PostMapping
   @NormallyDistributedEndpointDelaySimulation(mean = 50, standardDeviation = 25)
   public ResponseEntity<PriceDto> savePrice(@RequestBody @Valid PriceDto priceDto) {
-    Price price = priceMapper.priceDtoToPrice(priceDto);
-    Price savedPrice = priceService.savePriceForProduct(price);
-    PriceDto response = priceMapper.priceToPriceDto(savedPrice);
+    var price = priceMapper.priceDtoToPrice(priceDto);
+    var savedPrice = priceService.savePriceForProduct(price);
+    var response = priceMapper.priceToPriceDto(savedPrice);
     return ResponseEntity.ok().body(response);
   }
 
   private List<PriceDto> toDtos(List<Price> prices) {
     return prices.stream()
         .map(priceMapper::priceToPriceDto)
-        .collect(toUnmodifiableList());
+        .toList();
   }
 
 }

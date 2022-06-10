@@ -1,4 +1,4 @@
-package at.kocmana.testservices.ecommerceservice.config;
+package at.kocmana.testservices.ecommerceservice.configuration;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
@@ -18,7 +18,7 @@ public class BasicAuthEntryPoint extends BasicAuthenticationEntryPoint {
       throws IOException {
     response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName() + "");
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-    PrintWriter writer = response.getWriter();
+    var writer = response.getWriter();
     writer.println("HTTP Status 401 - " + authEx.getMessage());
   }
 

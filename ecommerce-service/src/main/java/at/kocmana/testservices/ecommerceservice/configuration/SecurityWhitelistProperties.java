@@ -1,4 +1,4 @@
-package at.kocmana.testservices.ecommerceservice.config;
+package at.kocmana.testservices.ecommerceservice.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
