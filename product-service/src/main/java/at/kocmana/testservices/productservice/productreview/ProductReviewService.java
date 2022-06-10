@@ -38,7 +38,7 @@ class ProductReviewService {
   }
 
   MultiValueMap<Integer, ProductReview> getReviewsForCustomers(List<Integer> customerIds) {
-    List<ProductReview> reviews = productReviewRepository.findByCustomerIdIn(customerIds);
+    var reviews = productReviewRepository.findByCustomerIdIn(customerIds);
     MultiValueMap<Integer, ProductReview> reviewsByCustomer = new LinkedMultiValueMap<>();
     reviews.forEach(review -> reviewsByCustomer.add(review.getCustomerId(), review));
 
@@ -46,12 +46,12 @@ class ProductReviewService {
   }
 
   int saveReview(ProductReview productReview) {
-    ProductReview savedReview = productReviewRepository.save(productReview);
+    var savedReview = productReviewRepository.save(productReview);
     return savedReview.getId();
   }
 
   void updateReview(ProductReview productReview) {
-    ProductReview oldProductReview = getReviewById(productReview.getId());
+    var oldProductReview = getReviewById(productReview.getId());
     productReview.setProduct(oldProductReview.getProduct());
     productReviewRepository.save(productReview);
   }

@@ -33,7 +33,7 @@ public class ProductInformationService {
   }
 
   Integer saveNewProduct(Product product) {
-    Product savedProduct = productInformationRepository.save(product);
+    var savedProduct = productInformationRepository.save(product);
     return savedProduct.getId();
   }
 
