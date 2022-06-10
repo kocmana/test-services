@@ -1,23 +1,21 @@
 package at.kocmana.testservices.productservice.config;
 
+import java.security.SecureRandom;
+import java.util.List;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
-import java.security.SecureRandom;
-import java.util.List;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration {
 
   private static final String ADMIN_ROLE = "ADMIN";
   private static final String USER_ROLE = "USER";
@@ -28,22 +26,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public WebSecurityConfiguration(BasicAuthEntryPoint authenticationEntryPoint,
-      SecurityWhitelistProperties securityWhitelistProperties, DataSource dataSource) {
+                                  SecurityWhitelistProperties securityWhitelistProperties, DataSource dataSource) {
     this.authenticationEntryPoint = authenticationEntryPoint;
     this.securityWhitelistProperties = securityWhitelistProperties;
     this.dataSource = dataSource;
   }
 
-  @Override
-  public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.jdbcAuthentication()
-        .dataSource(dataSource)
-        .passwordEncoder(passwordEncoder());
+  @Bean
+  public UserDetailsManager users() {
+    return new JdbcUserDetailsManager(dataSource);
   }
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.authorizeRequests()
         .antMatchers(HttpMethod.DELETE, "/**").hasRole(ADMIN_ROLE)
         .antMatchers(HttpMethod.POST, "/product/**").hasRole(ADMIN_ROLE)
         .antMatchers(HttpMethod.PATCH, "/product/**").hasRole(ADMIN_ROLE)
@@ -60,8 +56,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .httpBasic()
         .authenticationEntryPoint(authenticationEntryPoint);
 
-    http.csrf().disable()
+    httpSecurity.csrf().disable()
         .headers().frameOptions().disable();
+
+    return httpSecurity.build();
   }
 
   private String[] generateConfigurationWhitelist() {
