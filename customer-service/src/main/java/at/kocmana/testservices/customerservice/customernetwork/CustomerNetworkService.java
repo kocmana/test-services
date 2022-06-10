@@ -33,13 +33,13 @@ class CustomerNetworkService {
   }
 
   List<CustomerNetwork> getCustomerNetworksForCustomer(Integer customerId) {
-    List<CustomerInteraction> network = customerNetworkRepository
+    var network = customerNetworkRepository
         .findBySourceCustomerId(customerId);
 
-    List<Integer> targetCustomerIds = extractTargetCustomerIds(network);
-    Map<Integer, Customer> targetCustomersByCustomerId = retrieveCustomerInformationForTargetCustomers(
+    var targetCustomerIds = extractTargetCustomerIds(network);
+    var targetCustomersByCustomerId = retrieveCustomerInformationForTargetCustomers(
         targetCustomerIds);
-    Map<InteractionType, List<CustomerInteraction>> customersByInteractionType =
+    var customersByInteractionType =
         groupCustomersPerRelationshipType(network);
 
     return transformToCustomerNetworks(customersByInteractionType, targetCustomersByCustomerId);
@@ -48,7 +48,7 @@ class CustomerNetworkService {
   private List<Integer> extractTargetCustomerIds(List<CustomerInteraction> network) {
     return network.stream()
         .map(CustomerInteraction::getTargetCustomerId)
-        .collect(toUnmodifiableList());
+        .toList();
   }
 
   private Map<Integer, Customer> retrieveCustomerInformationForTargetCustomers(List<Integer> targetCustomerIds) {
@@ -71,9 +71,9 @@ class CustomerNetworkService {
             .targetCustomer(entry.getValue().stream()
                 .map(CustomerInteraction::getTargetCustomerId)
                 .map(targetCustomers::get)
-                .collect(toUnmodifiableList()))
+                .toList())
             .build())
-        .collect(toUnmodifiableList());
+        .toList();
   }
 
 }

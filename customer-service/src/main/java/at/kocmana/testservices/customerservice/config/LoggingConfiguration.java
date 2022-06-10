@@ -14,7 +14,7 @@ public class LoggingConfiguration {
 
   @Bean
   public RequestIdInterceptor<Long> epochRequestIdInterceptor() {
-    Supplier<Long> idGeneratorFunction = () -> Instant.now().getEpochSecond();
+    Supplier<Long> idGeneratorFunction = Instant.now()::getEpochSecond;
     return new RequestIdInterceptor<>(idGeneratorFunction);
   }
 
