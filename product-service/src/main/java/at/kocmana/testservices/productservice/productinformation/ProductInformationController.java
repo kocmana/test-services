@@ -9,8 +9,8 @@ import at.kocmana.testservices.productservice.productinformation.model.dto.Produ
 import at.kocmana.testservices.productservice.productinformation.model.dto.ProductUpdateRequest;
 import at.kocmana.testservices.productservice.productinformation.model.mapper.ProductMapper;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -57,8 +57,11 @@ public class ProductInformationController {
 
   @DeleteMapping(value = "/{id}")
   @NormallyDistributedEndpointDelaySimulation(mean = 600, standardDeviation = 100)
-  public void deleteProductById(@PathVariable @NotNull Integer id) {
+  @RolesAllowed("ADMIN")
+  public ResponseEntity<Void> deleteProductById(@PathVariable int id) {
     productInformationService.deleteProductById(id);
+
+    return ResponseEntity.noContent().build();
   }
 
   @PostMapping

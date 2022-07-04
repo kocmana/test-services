@@ -3,6 +3,7 @@ package at.kocmana.testservices.productservice.config;
 import java.security.SecureRandom;
 import java.util.List;
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,11 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@Slf4j
 public class WebSecurityConfiguration {
 
-  private static final String ADMIN_ROLE = "ADMIN";
-  private static final String USER_ROLE = "USER";
+  public static final String ADMIN_ROLE = "ADMIN";
+  public static final String USER_ROLE = "USER";
 
   private final BasicAuthEntryPoint authenticationEntryPoint;
   private final SecurityWhitelistProperties securityWhitelistProperties;
@@ -27,6 +29,8 @@ public class WebSecurityConfiguration {
   @Autowired
   public WebSecurityConfiguration(BasicAuthEntryPoint authenticationEntryPoint,
                                   SecurityWhitelistProperties securityWhitelistProperties, DataSource dataSource) {
+    log.warn("I got a call at security constructor.");
+
     this.authenticationEntryPoint = authenticationEntryPoint;
     this.securityWhitelistProperties = securityWhitelistProperties;
     this.dataSource = dataSource;
@@ -39,8 +43,11 @@ public class WebSecurityConfiguration {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+
+    log.warn("I got a call at security.");
+
     httpSecurity.authorizeRequests()
-        .antMatchers(HttpMethod.DELETE, "/**").hasRole(ADMIN_ROLE)
+        .antMatchers(HttpMethod.DELETE, "/product/**").hasRole(ADMIN_ROLE)
         .antMatchers(HttpMethod.POST, "/product/**").hasRole(ADMIN_ROLE)
         .antMatchers(HttpMethod.PATCH, "/product/**").hasRole(ADMIN_ROLE)
         .antMatchers("/review/**").hasAnyRole(ADMIN_ROLE, USER_ROLE)
@@ -53,6 +60,7 @@ public class WebSecurityConfiguration {
         .authenticated()
 
         .and()
+        .csrf().disable()
         .httpBasic()
         .authenticationEntryPoint(authenticationEntryPoint);
 

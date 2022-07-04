@@ -1,14 +1,17 @@
 package at.kocmana.testservices.productservice.productinformation.model.domain;
 
+import javax.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Embeddable;
-
 @Embeddable
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class ProductDimension {
 
