@@ -1,10 +1,9 @@
 package at.kocmana.testservices.customerservice.customerinformation.model.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Value;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
 @Value
 @Builder

@@ -25,11 +25,10 @@ public class WebSecurityConfiguration {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-    var filter = new ApiKeyAuthenticationFilter(apiKeyProperties.getHeader());
+    var filter = new ApiKeyAuthenticationFilter(apiKeyProperties.header());
     filter.setAuthenticationManager(authenticationManager);
 
     httpSecurity
-        .antMatcher("/**")
         .csrf().disable()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -43,7 +42,7 @@ public class WebSecurityConfiguration {
   AuthenticationManager generateAuthenticationManager() {
     return authentication -> {
       var principal = (String) authentication.getPrincipal();
-      if (!apiKeyProperties.getValues().contains(principal)) {
+      if (!apiKeyProperties.values().contains(principal)) {
         throw new BadCredentialsException("Invalid Credentials.");
       }
       authentication.setAuthenticated(true);

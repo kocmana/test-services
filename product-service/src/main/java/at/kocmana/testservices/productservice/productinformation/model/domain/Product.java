@@ -1,10 +1,9 @@
 package at.kocmana.testservices.productservice.productinformation.model.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "product")

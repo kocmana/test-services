@@ -1,10 +1,10 @@
 package at.kocmana.testservices.customerservice.customernetwork.model.domain;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 @NoArgsConstructor

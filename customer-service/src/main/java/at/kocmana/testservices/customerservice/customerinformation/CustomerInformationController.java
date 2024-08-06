@@ -6,7 +6,8 @@ import at.kocmana.testservices.customerservice.customerinformation.model.dto.Cus
 import at.kocmana.testservices.customerservice.customerinformation.model.dto.CustomerUpdateRequest;
 import at.kocmana.testservices.customerservice.customerinformation.model.mapper.CustomerMapper;
 import java.util.List;
-import javax.validation.Valid;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

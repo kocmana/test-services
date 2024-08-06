@@ -63,7 +63,7 @@ public class DelayAspect {
   }
 
   private void delayResponse(Delay delay) {
-    if (delayProperties.isLogDelays()) {
+    if (delayProperties.logDelays()) {
       log.info("Delaying API response for {}ms...", delay.getDelayInMs());
     }
     delay.delay();

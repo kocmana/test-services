@@ -1,10 +1,10 @@
 package at.kocmana.testservice.commons.requestid;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.function.Supplier;
 
 public class RequestIdInterceptor<T> implements HandlerInterceptor {
@@ -17,7 +17,7 @@ public class RequestIdInterceptor<T> implements HandlerInterceptor {
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-      Object handler) {
+                           Object handler) {
     T requestId = idGenerator.get();
     setIdInMdcContext(requestId);
     setIdAsRequestAttribute(request, requestId);

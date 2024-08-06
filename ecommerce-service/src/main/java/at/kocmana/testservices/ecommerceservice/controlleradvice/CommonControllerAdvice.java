@@ -4,14 +4,13 @@ import at.kocmana.testservice.commons.responses.ErrorResponse;
 import at.kocmana.testservice.commons.responses.ValidationErrorResponse;
 import at.kocmana.testservices.ecommerceservice.price.model.PriceNotFoundException;
 import at.kocmana.testservices.ecommerceservice.purchase.model.PurchaseNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 

@@ -1,9 +1,8 @@
 package at.kocmana.testservices.customerservice.customernetwork.model.domain;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "customer_interaction")

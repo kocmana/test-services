@@ -1,8 +1,7 @@
 package at.kocmana.testservices.customerservice.customerinformation.model.domain;
 
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "customer")

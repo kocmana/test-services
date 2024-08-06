@@ -1,10 +1,9 @@
 package at.kocmana.testservices.customerservice.customernetwork.model.dto;
 
 import at.kocmana.testservices.customerservice.customernetwork.model.domain.InteractionType;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
-
-import javax.validation.constraints.NotNull;
 
 @Value
 @Builder

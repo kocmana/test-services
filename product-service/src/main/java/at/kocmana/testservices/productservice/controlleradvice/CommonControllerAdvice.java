@@ -4,14 +4,13 @@ import at.kocmana.testservice.commons.responses.ErrorResponse;
 import at.kocmana.testservice.commons.responses.ValidationErrorResponse;
 import at.kocmana.testservices.productservice.productinformation.model.ProductInformationNotFoundException;
 import at.kocmana.testservices.productservice.productreview.model.ProductReviewNotFoundException;
+import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.validation.ValidationException;
 
 import static org.springframework.http.HttpStatus.*;
 

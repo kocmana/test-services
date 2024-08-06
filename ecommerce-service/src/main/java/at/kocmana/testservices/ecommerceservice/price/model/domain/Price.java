@@ -1,9 +1,9 @@
 package at.kocmana.testservices.ecommerceservice.price.model.domain;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

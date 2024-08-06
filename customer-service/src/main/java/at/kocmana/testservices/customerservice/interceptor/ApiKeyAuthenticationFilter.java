@@ -1,8 +1,7 @@
 package at.kocmana.testservices.customerservice.interceptor;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
-
-import javax.servlet.http.HttpServletRequest;
 
 public class ApiKeyAuthenticationFilter extends AbstractPreAuthenticatedProcessingFilter {
 

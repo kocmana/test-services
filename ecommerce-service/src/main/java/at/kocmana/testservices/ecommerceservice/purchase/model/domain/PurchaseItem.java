@@ -1,8 +1,8 @@
 package at.kocmana.testservices.ecommerceservice.purchase.model.domain;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

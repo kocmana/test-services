@@ -1,10 +1,9 @@
 package at.kocmana.testservices.ecommerceservice.price.model.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotNull;
 
 @Value
 @Builder

@@ -2,13 +2,12 @@ package at.kocmana.testservice.commons.delay.interceptor;
 
 import at.kocmana.testservice.commons.delay.config.DelayProperties;
 import at.kocmana.testservice.commons.delay.model.NormallyDistributedDelay;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
@@ -22,18 +21,18 @@ public class NormallyDistributedServiceDelayInterceptor implements HandlerInterc
       DelayProperties delayProperties) {
     this.delayProperties = delayProperties;
     this.delay = new NormallyDistributedDelay(
-        delayProperties.getServiceDelayMean(), delayProperties.getServiceDelayStandardDeviation());
+        delayProperties.serviceDelayMean(), delayProperties.serviceDelayStandardDeviation());
   }
 
   @Override
   public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
-      final Object handler) {
+                           final Object handler) {
     delayService();
     return true;
   }
 
   private void delayService() {
-    if (delayProperties.isLogDelays()) {
+    if (delayProperties.logDelays()) {
       log.info("Simulating RTT: Delaying service call for {}ms...", delay.getDelayInMs());
       delay.delay();
     }
