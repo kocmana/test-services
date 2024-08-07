@@ -1,0 +1,801 @@
+{
+	"info": {
+		"_postman_id": "fd4a0399-3ae7-4b04-bd04-c23949bff392",
+		"name": "Master Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product Service",
+			"item": [
+				{
+					"name": "Product Information",
+					"item": [
+						{
+							"name": "Get all Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{productService.url}}/product",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Product by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{productService.url}}/product/1",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"product",
+										"1"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Hammer\",\n    \"descripion\": \"If you have a hammer, everything looks like a thumb\",\n    \"weight\": 1.82,\n    \"dimension\": {\n        \"width\": 20,\n        \"height\": 40,\n        \"depth\": 10\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{productService.url}}/product",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 60,\n    \"name\": \"Hammer\",\n    \"descripion\": \"If you have a thumb, everything looks like a hammer\",\n    \"weight\": 1.82,\n    \"dimension\": {\n        \"width\": 20,\n        \"height\": 40,\n        \"depth\": 10\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{productService.url}}/product",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Product Review",
+					"item": [
+						{
+							"name": "Get all Product Reviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{productService.url}}/review",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Product Reviews by Product ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{productService.url}}/review/product/:productId",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"review",
+										"product",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Product Reviews by Customer ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{productService.url}}/review/customer/:customerId",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"review",
+										"customer",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Product Review",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": 1,\n    \"stars\": 5,\n    \"review\": \"Amazing\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{productService.url}}/review/product/:productId",
+									"host": [
+										"{{productService.url}}"
+									],
+									"path": [
+										"review",
+										"product",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Get Swagger Documentation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productService.url}}/swagger",
+							"host": [
+								"{{productService.url}}"
+							],
+							"path": [
+								"swagger"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "username",
+						"value": "{{productService.user.username}}",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "{{productService.user.password}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c4d13bcc-0bc8-4693-a8a5-f135a40567dd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e43cdd1-29a6-4216-8411-1ccc286e1f78",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Customer Service",
+			"item": [
+				{
+					"name": "Customer Information",
+					"item": [
+						{
+							"name": "Get all Customers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{customerService.url}}/customer",
+									"host": [
+										"{{customerService.url}}"
+									],
+									"path": [
+										"customer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer by Customer ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{customerService.url}}/customer/:customerId",
+									"host": [
+										"{{customerService.url}}"
+									],
+									"path": [
+										"customer",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Customer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gender\": \"MALE\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Musterfrau\",\n    \"street\": \"Ottakringer Straße\",\n    \"houseNumber\": \"27/3\",\n    \"top\": \"3a\",\n    \"postalCode\": \"1160\",\n    \"country\": \"Österreich\",\n    \"telephoneNumber\": \"01/987 654 321\",\n    \"emailAddress\": \"maria.musterfrau@mail.da\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{customerService.url}}/customer",
+									"host": [
+										"{{customerService.url}}"
+									],
+									"path": [
+										"customer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Customer",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": 1,\n    \"gender\": \"FEMALE\",\n    \"firstName\": \"Maria\",\n    \"lastName\": \"Musterfrau\",\n    \"street\": \"Ottakringer Straße\",\n    \"houseNumber\": \"27/3\",\n    \"top\": \"3a\",\n    \"postalCode\": \"1160\",\n    \"country\": \"Österreich\",\n    \"telephoneNumber\": \"01/987 654 321\",\n    \"emailAddress\": \"maria.musterfrau@mail.da\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{customerService.url}}/customer",
+									"host": [
+										"{{customerService.url}}"
+									],
+									"path": [
+										"customer"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fc1aeda4-9ae0-42b6-a687-d52e410e48d0",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c1af6ec4-45a8-4b0b-973a-0b88ee62bc96",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Customer Relationships",
+					"item": [
+						{
+							"name": "Get Customer Networks",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sourceCustomerId\": 1,\n    \"targetCustomerId\": 3,\n    \"relationshipType\": \"RECRUITED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{customerService.url}}/network/:customerId",
+									"host": [
+										"{{customerService.url}}"
+									],
+									"path": [
+										"network",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Relationship",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sourceCustomerId\": 1,\n    \"targetCustomerId\": 2,\n    \"interactionType\": \"GAVE_PRESENT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{customerService.url}}/network/",
+									"host": [
+										"{{customerService.url}}"
+									],
+									"path": [
+										"network",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Get Swagger Documentation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{customerService.url}}/swagger",
+							"host": [
+								"{{customerService.url}}"
+							],
+							"path": [
+								"swagger"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{customerService.apiKey}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "x-api-key",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c69216d2-2deb-43bf-81d7-1aa07c630144",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "51d23934-219c-45b0-910e-b47cfaa654c0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ECommerce Service",
+			"item": [
+				{
+					"name": "Purchase Information",
+					"item": [
+						{
+							"name": "Get all Product Reviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ecommerceService.url}}/purchase/:purchaseId",
+									"host": [
+										"{{ecommerceService.url}}"
+									],
+									"path": [
+										"purchase",
+										":purchaseId"
+									],
+									"variable": [
+										{
+											"key": "purchaseId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Purchase",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customerId\": 1,\n    \"items\": [\n        {\n            \"purchaseId\": 1,\n            \"productId\": 1,\n            \"amount\": 5\n        }\n    ],\n    \"paymentType\": \"CASH\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ecommerceService.url}}/purchase/",
+									"host": [
+										"{{ecommerceService.url}}"
+									],
+									"path": [
+										"purchase",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Price Information",
+					"item": [
+						{
+							"name": "Get current Price for Product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ecommerceService.url}}/price/product/:productId",
+									"host": [
+										"{{ecommerceService.url}}"
+									],
+									"path": [
+										"price",
+										"product",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Prices for Product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ecommerceService.url}}/price/product/:productId/all",
+									"host": [
+										"{{ecommerceService.url}}"
+									],
+									"path": [
+										"price",
+										"product",
+										":productId",
+										"all"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": 1,\n    \"value\": 23.99,\n    \"currency\": \"EURO\",\n    \"validFrom\": \"2021-01-01T00:01\",\n    \"validTo\": \"2022-01-01T00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ecommerceService.url}}/price/",
+									"host": [
+										"{{ecommerceService.url}}"
+									],
+									"path": [
+										"price",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Get Swagger Documentation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ecommerceService.url}}/swagger",
+							"host": [
+								"{{ecommerceService.url}}"
+							],
+							"path": [
+								"swagger"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "{{ecommerceService.user.password}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{ecommerceService.user.username}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "836a3cb8-ff63-4c50-954e-dd55714ca46e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "919e50d9-248e-4532-be8a-b6b09cb96ae7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Integration Service",
+			"item": [
+				{
+					"name": "GraphQL Endpoint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  customer(customerId: 1) {\r\n    gender\r\n    firstName\r\n    lastName\r\n    emailAddress\r\n    purchases {\r\n      id\r\n      paymentType\r\n      items {\r\n        product {\r\n          id\r\n          name\r\n          price {\r\n            value\r\n            currency\r\n          }\r\n          reviews {\r\n            stars\r\n            review\r\n          }\r\n        }\r\n      }\r\n    }\r\n    network {\r\n      interactionType\r\n      targetCustomer {\r\n        gender\r\n        firstName\r\n        lastName\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{integrationService.url}}/graphql",
+							"host": [
+								"{{integrationService.url}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "{{integrationService.user.password}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{integrationService.user.username}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fd2bc73f-97fd-4214-a609-2ceffd41904d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0a167b3-14f1-40ed-92fb-67b35c202695",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
