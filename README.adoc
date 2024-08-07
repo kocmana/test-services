@@ -22,9 +22,10 @@ These services have originally been devised during a https://github.com/kocmana/
 === Stack
 Services are based on the following Stack:
 
-* Java 17 as latest LTS Version
-* Spring Boot 2.7.0
-* Maven 
+* Java 21 as latest LTS Version
+* Spring Boot 3.2.2
+* Maven
+* Postgres
 * Docker via JIB
 
 [NOTE]
