@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset kocman:6
 INSERT INTO price (product_id, valid_from, valid_to, currency, value)
 VALUES (1, '2020-01-01T00:00:00', '2022-12-31T23:59:59', 'EUR', 19.99);
 INSERT INTO price (product_id, valid_from, valid_to, currency, value)
@@ -74,7 +77,9 @@ INSERT INTO price (product_id, valid_from, valid_to, currency, value)
 VALUES (19, '2020-01-01T00:00:00', '2020-12-31T23:59:59', 'EUR', 19.99);
 INSERT INTO price (product_id, valid_from, valid_to, currency, value)
 VALUES (20, '2019-01-01T00:00:00', '2019-12-31T23:59:59', 'EUR', 19.99);
+--rollback TRUNCATE price;
 
+--changeset kocman:7
 INSERT INTO purchase(customer_id, payment_type)
 VALUES (1, 'CASH');
 INSERT INTO purchase(customer_id, payment_type)
@@ -135,4 +140,5 @@ INSERT INTO purchase_item (amount, currency, price_per_unit, product_id, purchas
 INSERT INTO purchase_item (amount, currency, price_per_unit, product_id, purchase_id) VALUES ( 3, 'EUR', 19.99, 17, 17 );
 INSERT INTO purchase_item (amount, currency, price_per_unit, product_id, purchase_id) VALUES ( 2, 'EUR', 25.99, 18, 18 );
 INSERT INTO purchase_item (amount, currency, price_per_unit, product_id, purchase_id) VALUES ( 3, 'EUR', 19.99, 19, 19 );
-INSERT INTO purchase_item (amount, currency, price_per_unit, product_id, purchase_id) VALUES ( 2, 'EUR', 25.99, 20, 20 );
+INSERT INTO purchase_item (amount, currency, price_per_unit, product_id, purchase_id) VALUES ( 2, 'EUR', 25.99, 20, 20 );--rollback TRUNCATE product;
+--rollback TRUNCATE purchase, purchase_item;

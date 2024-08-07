@@ -1,4 +1,6 @@
--- Default Products
+--liquibase formatted sql
+
+--changeset kocman:6
 INSERT INTO product (name, description, weight, width, height, depth)
 VALUES ('Foo1', 'Bar', 3.5, 3, 4, 5);
 INSERT INTO product (name, description, weight, width, height, depth)
@@ -39,8 +41,9 @@ INSERT INTO product (name, description, weight, width, height, depth)
 VALUES ('Foo19', 'Bar', 3.5, 3, 4, 5);
 INSERT INTO product (name, description, weight, width, height, depth)
 VALUES ('Foo20', 'Bar', 3.5, 3, 4, 5);
+--rollback TRUNCATE product;
 
--- Default product reviews
+--changeset kocman:7
 INSERT INTO product_review (customer_id, product_id, stars, review)
 VALUES (1, 1, 1, 'bad');
 INSERT INTO product_review (customer_id, product_id, stars, review)
@@ -81,3 +84,4 @@ INSERT INTO product_review (customer_id, product_id, stars, review)
 VALUES (19, 19, 5, 'good');
 INSERT INTO product_review (customer_id, product_id, stars, review)
 VALUES (20, 20, 5, 'superb');
+--rollback TRUNCATE product_review;

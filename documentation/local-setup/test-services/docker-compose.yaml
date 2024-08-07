@@ -1,0 +1,54 @@
+services:
+  products-db:
+    image: postgres:16.3
+    container_name: products-db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: products
+    volumes:
+      - test-services-products:/var/lib/postgresql/data
+    ports:
+      - 5430:5432
+    command: ["postgres", "-c", "log_statement=all"]
+
+  customers-db:
+    image: postgres:16.3
+    container_name: customers-db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: customers
+    volumes:
+      - test-services-customers:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+    command: [ "postgres", "-c", "log_statement=all" ]
+
+  ecommerce-db:
+    image: postgres:16.3
+    container_name: ecommerce-db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ecommerce
+    volumes:
+      - test-services-ecommerce:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    command: [ "postgres", "-c", "log_statement=all" ]
+
+  test-service-adminer:
+    container_name: test-service-adminer
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
+
+volumes:
+  test-services-products:
+  test-services-customers:
+  test-services-ecommerce:

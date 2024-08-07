@@ -1,17 +1,20 @@
 package at.kocmana.testservices.customerservice.config;
 
 import at.kocmana.testservices.customerservice.interceptor.ApiKeyAuthenticationFilter;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfiguration {
 
   private final AuthenticationManager authenticationManager;
@@ -24,15 +27,14 @@ public class WebSecurityConfiguration {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+  public SecurityFilterChain filterChain(HttpSecurity httpSecurity, HttpSession httpSession) throws Exception {
     var filter = new ApiKeyAuthenticationFilter(apiKeyProperties.header());
     filter.setAuthenticationManager(authenticationManager);
 
     httpSecurity
-        .csrf().disable()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().addFilter(filter)
+        .csrf(Customizer.withDefaults())
+        .sessionManagement(Customizer.withDefaults())
+        .addFilter(filter)
         .authorizeRequests()
         .anyRequest().authenticated();
 

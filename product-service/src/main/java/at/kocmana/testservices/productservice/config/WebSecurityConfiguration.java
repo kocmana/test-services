@@ -22,12 +22,10 @@ public class WebSecurityConfiguration {
     private static final String ADMIN_ROLE = "ADMIN";
     private static final String USER_ROLE = "USER";
 
-    private final SecurityWhitelistProperties securityWhitelistProperties;
     private final DataSource dataSource;
 
     @Autowired
-    public WebSecurityConfiguration(SecurityWhitelistProperties securityWhitelistProperties, DataSource dataSource) {
-        this.securityWhitelistProperties = securityWhitelistProperties;
+    public WebSecurityConfiguration(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -46,7 +44,6 @@ public class WebSecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/**").hasAnyRole(ADMIN_ROLE, USER_ROLE)
 
                         .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers(generateConfigurationWhitelist()).permitAll()
 
                         .anyRequest()
                         .authenticated())
@@ -54,11 +51,6 @@ public class WebSecurityConfiguration {
                 .csrf(Customizer.withDefaults());
 
         return httpSecurity.build();
-    }
-
-    private String[] generateConfigurationWhitelist() {
-        List<String> whitelist = securityWhitelistProperties.whitelist();
-        return whitelist.toArray(new String[0]);
     }
 
     @Bean

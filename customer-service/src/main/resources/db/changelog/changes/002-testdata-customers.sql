@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset kocman:3
 -- Default customer
 INSERT INTO customer
 VALUES (1, 'MALE', 'Max', 'Mustermann1', 'Wilheminenstraße', '103/2', '3a', '1160', 'Österreich', '01/234 567 890',
@@ -59,8 +62,9 @@ VALUES (19, 'MALE', 'Max', 'Mustermann19', 'Wilheminenstraße', '103/2', '3a', '
 INSERT INTO customer
 VALUES (20, 'MALE', 'Max', 'Mustermann20', 'Wilheminenstraße', '103/2', '3a', '1160', 'Österreich', '01/234 567 890',
         'max.mustermann@mail.da');
+--rollback TRUNCATE customer;
 
--- Default customer interactions
+--changeset kocman:4
 INSERT INTO customer_interaction
 VALUES (1, 'RECRUITED', 2);
 INSERT INTO customer_interaction
@@ -101,3 +105,4 @@ INSERT INTO customer_interaction
 VALUES (19, 'RECRUITED', 20);
 INSERT INTO customer_interaction
 VALUES (20, 'RECRUITED', 1);
+--rollback TRUNCATE customer_interaction;

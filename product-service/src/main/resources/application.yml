@@ -7,6 +7,14 @@ spring:
   application:
     name: ProductService
   jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: true
     hibernate:
       ddl-auto: none
+  threads:
+    virtual:
+      enabled: true

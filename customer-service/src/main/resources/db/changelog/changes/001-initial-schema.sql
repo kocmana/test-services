@@ -1,6 +1,9 @@
+--liquibase formatted sql
+
+--changeset kocman:1
 CREATE TABLE IF NOT EXISTS customer
 (
-    customer_id      INTEGER     NOT NULL AUTO_INCREMENT,
+    customer_id      SERIAL      NOT NULL,
     gender           VARCHAR(6),
     first_name       VARCHAR(50) NOT NULL,
     last_name        VARCHAR(50) NOT NULL,
@@ -13,7 +16,9 @@ CREATE TABLE IF NOT EXISTS customer
     email_address    VARCHAR(50) NOT NULL,
     PRIMARY KEY (customer_id)
 );
+--rollback DROP TABLE customer;
 
+--changeset kocman:2
 CREATE TABLE IF NOT EXISTS customer_interaction
 (
     source_customer_id   INTEGER     NOT NULL,
@@ -23,3 +28,4 @@ CREATE TABLE IF NOT EXISTS customer_interaction
     FOREIGN KEY (source_customer_id) REFERENCES customer ON DELETE CASCADE,
     FOREIGN KEY (target_customer_id) REFERENCES customer ON DELETE CASCADE
 );
+--rollback DROP TABLE customer_interaction;
